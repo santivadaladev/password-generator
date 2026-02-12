@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore Password Sicure</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #f0f0f0;
+        }
+        .container {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        label {
+            margin-right: 5px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+        #password {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Generatore Password Sicure</h2>
+        <div>
+            <label>Lunghezza:</label>
+            <input type="number" id="length" value="12" min="4" max="64">
+        </div>
+        <div>
+            <input type="checkbox" id="uppercase" checked>
+            <label for="uppercase">Maiuscole</label>
+            <input type="checkbox" id="numbers" checked>
+            <label for="numbers">Numeri</label>
+            <input type="checkbox" id="symbols" checked>
+            <label for="symbols">Simboli</label>
+        </div>
+        <button onclick="generatePassword()">Genera Password</button>
+        <div id="password">La tua password apparirà qui</div>
+        <button onclick="copyPassword()">Copia negli appunti</button>
+    </div>
+
+    <script>
+        function generatePassword() {
+            const length = document.getElementById('length').value;
+            const useUpper = document.getElementById('uppercase').checked;
+            const useNumbers = document.getElementById('numbers').checked;
+            const useSymbols = document.getElementById('symbols').checked;
+
+            let lowerChars = 'abcdefghijklmnopqrstuvwxyz';
+            let upperChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let numberChars = '0123456789';
+            let symbolChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+            let charset = lowerChars;
+
+            if (useUpper) charset += upperChars;
+            if (useNumbers) charset += numberChars;
+            if (useSymbols) charset += symbolChars;
+
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += charset.charAt(Math.floor(Math.random() * charset.length));
+            }
+
+            document.getElementById('password').textContent = password;
+        }
+
+        function copyPassword() {
+            const passwordText = document.getElementById('password').textContent;
+            navigator.clipboard.writeText(passwordText).then(() => {
+                alert('Password copiata negli appunti!');
+            });
+        }
+    </script>
+</body>
+</html>
