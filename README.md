@@ -13,13 +13,10 @@ Selezione della lunghezza della password (da 4 a 64 caratteri)
 Opzioni per includere:
 
 Maiuscole
-
 Numeri
-
 Simboli
-
 Generazione password casuale con un click
-
 Copia negli appunti con un click
-
 UI semplice e responsiva
+
+https://santivadaladev.github.io/password-generator/
